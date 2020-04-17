@@ -9,13 +9,13 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:47.0) Gecko/20100101 F
         }
 url = 'https://www.cv.ee/toopakkumised/harjumaa/infotehnoloogia'
 req = session.get(url, headers=headers)
-#domain = 'https://www.cv.ee'
-#jobs = []
+domain = 'https://www.cv.ee'
+jobs = []
 if req.status_code == 200:
     bsObj = BS(req.content, "html.parser")
-# обычные объявления    div = bsObj.find('div', attrs={'class': 'offer_primary_info'})
-    div = bsObj.find('div', attrs={'class': 'cvo_module_offer_content'})
-#    div_list = bsObj.find_all('div', attrs={'class': 'offer_primary_info'})
+    div = bsObj.find('div', attrs={'class': 'offer_primary_info'})
+    print(div.find('h2').text)
+#    print(div.find('p', attrs={'class': 'overflow'}).text)
 #    for div in div_list
 #        title = div.find('h2')
 #        href = title.a['href']
@@ -28,7 +28,6 @@ if req.status_code == 200:
 #    })
 
 
-handle = codecs.open('cv.html', "w", 'utf-8')
-handle.write(str(div.contents))
-#handle.write(str(jobs))
+handle = codecs.open('cv_.html', "w", 'utf-8')
+handle.write(str(jobs))
 handle.close()
