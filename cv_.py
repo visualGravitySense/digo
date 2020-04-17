@@ -13,19 +13,14 @@ domain = 'https://www.cv.ee'
 jobs = []
 if req.status_code == 200:
     bsObj = BS(req.content, "html.parser")
-    div = bsObj.find('div', attrs={'class': 'offer_primary_info'})
-    print(div.find('h2').text)
-#    print(div.find('p', attrs={'class': 'overflow'}).text)
-#    for div in div_list
-#        title = div.find('h2')
-#        href = title.a['href']
-#        short = div.p.text
+    div_list = bsObj.find_all('div', attrs={'class': 'offer_primary_info'})
+    for div in div_list:
+        title = div.find('h2')
+        href = title.a['href']
 
-#    jobs.append({'href': domain + href,
-#                'title': title.text,
-#                'descript': short,
-#                'company': company
-#    })
+        company = "No name"
+
+    jobs.append({'href': domain + href,'title': title.text,'company': company})
 
 
 handle = codecs.open('cv_.html', "w", 'utf-8')
