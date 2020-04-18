@@ -13,13 +13,15 @@ domain = 'https://www.cv.ee'
 jobs = []
 if req.status_code == 200:
     bsObj = BS(req.content, "html.parser")
-    div_list = bsObj.find_all('div', attrs={'class': 'offer_primary_info'})
+    div_list = bsObj.find_all('div', attrs={'class': 'cvo_module_offer_content'})
     for div in div_list:
         title = div.find('h2')
         href = title.a['href']
-
+        #short = div.p.text
         company = "No name"
-
+        logo = div.find('img')
+        if logo:
+            company = logo['alt']
     jobs.append({'href': domain + href,'title': title.text,'company': company})
 
 
