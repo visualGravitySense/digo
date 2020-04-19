@@ -24,6 +24,7 @@ if req.status_code == 200:
 
 for url in urls:
     time.sleep(2)
+    req = session.get(base_url, headers=headers)
     if req.status_code == 200:
         bsObj = BS(req.content, "html.parser")
         div_list = bsObj.find_all('div', attrs={'class': 'job-link'})
