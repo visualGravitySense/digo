@@ -33,9 +33,9 @@ for url in urls:
                 descr = li.find('div', attrs={'class': 'sh-info'})
                 if descr:
                     short = descr.text
-                    jobs.append({'href': href,
+                jobs.append({'href': href,
                             'title': title,
-                            'descripti': short,
+                            'descript': short,
                             'company': company})
 
 
