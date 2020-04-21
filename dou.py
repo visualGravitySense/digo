@@ -44,9 +44,9 @@ template = '<!doctype html><html lang="en"><head><meta charset="utf-8"><head><bo
 end = '</body></html>'
 content = '<h2> Dou</h2>'
 for job in jobs:
-    contnet += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><p>{company}</p><br/>'.format(**job)
+    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><br/>'.format(**job)
     content += '<hr/><br/><br/>'
 data = template + content + end
-handle = codecs.open('jobs.html', "w", "utf-8")
+handle = codecs.open('dou.html', "w", "utf-8")
 handle.write(str(data))
 handle.close()
