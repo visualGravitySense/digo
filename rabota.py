@@ -27,9 +27,9 @@ for url in urls:
                 href = p.a['href']
                 short = 'No description'
                 company = "No name"
-                logo = tr.find('span', attrs={'class': 'location'})
-#                if logo:
-#                    company = logo.a.text
+                logo = tr.find('div', attrs={'class': 'card-logo'})
+                if logo:
+                    company = logo.a.text
                 div = tr.find('div', attrs={'class': 'card-description'})
                 if div:
                     short = p.text
