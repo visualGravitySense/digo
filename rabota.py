@@ -13,36 +13,27 @@ jobs = []
 urls = []
 urls.append(base_url)
 
-req = session.get(base_url, headers=headers)
-if req.status_code == 200:
-    bsObj = BS(req.content, "html.parser")
-    pagination = bsObj.find('dl', attrs={'id': 'content_vacancyList_gridList_pagerInnerTable'})
-    if pagination:
-        pages = pagination.find_all('li', attrs={'class': False})
-        for page in pages:
-            urls.append(domain + page.a['href'])
-
 for url in urls:
     time.sleep(2)
     req = session.get(url, headers=headers)
     if req.status_code == 200:
         bsObj = BS(req.content, "html.parser")
-        table = bsObj.find('table', attrs={'id': 'content_vacancyList_gridList'})
+        table = bsObj.find('table', attrs={'id': 'ctl00_content_ctl00_gridList'})
         if table:
             tr_list = bsObj.find_all('tr', attrs={'id': True})
             for tr in tr_list:
-                h3 = tr.find('h3', attrs={'class': 'f-vacancylist-vacancytitle'})
-                title = h3.a.text
-                href = h3.a['href']
+                p = tr.find('p', attrs={'class': 'card-title'})
+                title = p.a.text
+                href = p.a['href']
                 short = 'No description'
                 company = "No name"
-                logo = tr.find('p', attrs={'class': 'f-vacancylist-companyname'})
-                if logo:
-                    company = logo.a.text
-                p = tr.find('p', attrs={'class': 'f-vacancylist-shortdescr'})
-                if p:
+                logo = tr.find('span', attrs={'class': 'location'})
+#                if logo:
+#                    company = logo.a.text
+                div = tr.find('div', attrs={'class': 'card-description'})
+                if div:
                     short = p.text
-                    jobs.append({'href': href,
+                jobs.append({'href': href,
                             'title': title,
                             'descript': short,
                             'company': company})
@@ -51,11 +42,11 @@ for url in urls:
 
 template = '<!doctype html><html lang="en"><head><meta charset="utf-8"><head><body>'
 end = '</body></html>'
-content = '<h2> Rabota.ua</h2>'
+content = '<h2> Rabota</h2>'
 for job in jobs:
-    contnet += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><p>{company}</p><br/>'.format(**job)
+    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><br/>'.format(**job)
     content += '<hr/><br/><br/>'
 data = template + content + end
-handle = codecs.open('jobs1.html', "w", "utf-8")
+handle = codecs.open('rabota.html', "w", "utf-8")
 handle.write(str(data))
 handle.close()
