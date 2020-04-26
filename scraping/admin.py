@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(City)
 admin.site.register(Vacancy)
+admin.site.register(Speciality)
