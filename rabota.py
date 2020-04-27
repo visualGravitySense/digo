@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 import codecs
 import time
+import datetime
 session = requests.Session()
 headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
             'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
