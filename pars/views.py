@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .utils import *
-from .models import *
+from scraping.utils import *
+from scraping.models import *
 
 def home(request):
     jobs = djinni()
@@ -10,7 +10,7 @@ def home(request):
     url_list = [i['url'] for i in v]
     for job in jobs:
         if job['href'] not in url_list:
-            vacancy = Vacancy(city=city.id, speciality=speciality.id, url=job['href'],
+            vacancy = Vacancy(city=city, speciality=speciality, url=job['href'],
                             title=job['title'], description=job['descript'], company=job['company'])
             vacancy.save()
 
