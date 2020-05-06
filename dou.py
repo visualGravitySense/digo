@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 import codecs
 import time
+
 session = requests.Session()
 headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
             'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
@@ -44,7 +45,7 @@ template = '<!doctype html><html lang="en"><head><meta charset="utf-8"><head><bo
 end = '</body></html>'
 content = '<h2> Dou</h2>'
 for job in jobs:
-    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><br/>'.format(**job)
+    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><p>{company}</p><br/>'.format(**job)
     content += '<hr/><br/><br/>'
 data = template + content + end
 handle = codecs.open('dou.html', "w", "utf-8")
