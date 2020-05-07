@@ -28,24 +28,22 @@ for url in urls:
                 href = p.a['href']
                 short = 'No description'
                 company = "No name"
-                logo = tr.find('div', attrs={'class': 'card-logo'})
+                logo = tr.find('p', attrs={'class': 'company-name'})
                 if logo:
                     company = logo.a.text
-                div = tr.find('div', attrs={'class': 'card-description'})
-                if div:
+                p = tr.find('div', attrs={'class': 'card-description'})
+                if p:
                     short = p.text
-                jobs.append({'href': href,
+                jobs.append({'href': domain + href,
                             'title': title,
                             'descript': short,
                             'company': company})
-
-
 
 template = '<!doctype html><html lang="en"><head><meta charset="utf-8"><head><body>'
 end = '</body></html>'
 content = '<h2> Rabota</h2>'
 for job in jobs:
-    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><br/>'.format(**job)
+    content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><p>{company}</p><br/>'.format(**job)
     content += '<hr/><br/><br/>'
 data = template + content + end
 handle = codecs.open('rabota.html', "w", "utf-8")
