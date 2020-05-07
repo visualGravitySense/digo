@@ -12,9 +12,9 @@ base_url = 'https://rabota.ua/jobsearch/vacancy_list?regionId=1&keyWords=Python'
 domain = 'https://rabota.ua'
 jobs = []
 urls = []
-yesterday = datetime.date.today()-datetime.timedelta(1)
-one_day_ago = yesterday.strftime('%d.%m.%Y')
-base_url = base_url + one_day_ago
+#yesterday = datetime.date.today()-datetime.timedelta(1)
+#one_day_ago = yesterday.strftime('%d.%m.%Y')
+#base_url = base_url + one_day_ago
 urls.append(base_url)
 
 req = session.get(base_url, headers=headers)
