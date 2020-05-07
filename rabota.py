@@ -12,7 +12,19 @@ base_url = 'https://rabota.ua/jobsearch/vacancy_list?regionId=1&keyWords=Python'
 domain = 'https://rabota.ua'
 jobs = []
 urls = []
+yesterday = datetime.date.today()-datetime.timedelta(1)
+one_day_ago = yesterday.strftime('%d.%m.%Y')
+base_url = base_url + one_day_ago
 urls.append(base_url)
+
+req = session.get(base_url, headers=headers)
+if req.status_code == 200:
+    bsObj = BS(req.content, "html.parser")
+    pagination = bsObj.find('dl', attrs={'id': 'ctl00_content_ctl00_gridList_ctl23_pagerInnerTable'})
+    if pagination:
+        pages = pagination.find_all('a', attrs={'class': 'f-always-blue'})
+        for page in pages:
+            urls.append(domain + page['href'])
 
 for url in urls:
     time.sleep(2)
