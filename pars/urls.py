@@ -21,5 +21,5 @@ from .views import *
 
 urlpatterns = [
     path('administrator/', admin.site.urls),
-    path('home/', home),
+    path('index/', home),
 ]

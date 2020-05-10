@@ -9,6 +9,7 @@ def home(request):
 #    jobs.extend(djinni())
 #    jobs.extend(rabota())
 #    jobs.extend(work())
+
 '''
     city = City.objects.get(name='Lviv')
     speciality = Speciality.objects.get(name='Python')
