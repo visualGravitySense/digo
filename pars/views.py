@@ -10,19 +10,7 @@ def home(request):
     url_list = [i['url'] for i in v]
     for job in jobs:
         if job['href'] not in url_list:
-            vacancy = Vacancy(city=city, speciality=speciality,
-            url=job['href'], title=job['title'], description=job['descript'],
-            company=job['company'])
-    vacancy.save()
+            vacancy = Vacancy(city=city, speciality=speciality, url=job['href'], title=job['title'], description=job['descript'], company=job['company'])
+            vacancy.save()
+
     return render(request, 'base.html', {'jobs': jobs})
-
-#    jobs = []
-#    jobs.extend(djinni())
-#    jobs.extend(rabota())
-#    jobs.extend(work())
-
-'''
-
-#    return render(request, 'base.html', {'jobs': jobs})
-
-'''
