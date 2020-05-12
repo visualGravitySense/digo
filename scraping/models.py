@@ -22,7 +22,7 @@ class Speciality(models.Model):
 
 class Vacancy(models.Model):
     url = models.CharField(max_length=250, unique=True, verbose_name='Адрес вакансии')
-    title = models.CharField(max_length=250, unique=True, verbose_name='Заголовок вакансии')
+    title = models.CharField(max_length=250, verbose_name='Заголовок вакансии')
     description = models.TextField(blank=True, verbose_name='Описание вакансии')
     company = models.TextField(max_length=250, blank=True, verbose_name='Название компании')
     city = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE)
