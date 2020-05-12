@@ -1,5 +1,5 @@
 """
-ASGI config for pars project.
+ASGI config for find_it project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pars.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'find_it.settings')
 
 application = get_asgi_application()

@@ -1,4 +1,4 @@
-"""pars URL Configuration
+"""find_it URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -13,13 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from .views import *
 
 urlpatterns = [
-    path('administrator/', admin.site.urls),
-    path('index/', home),
+    path('admin/', admin.site.urls),
 ]
