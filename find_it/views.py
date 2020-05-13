@@ -7,6 +7,7 @@ def home(request):
     jobs.extend(djinni())
     jobs.extend(rabota())
     jobs.extend(work())
+    jobs.extend(dou())
     city = City.objects.get(name='Lviv')
     speciality = Speciality.objects.get(name='Python')
     v = Vacancy.objects.filter(city=city.id, speciality=speciality.id).values('url')
