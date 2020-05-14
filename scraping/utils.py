@@ -7,9 +7,9 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:47.0) Gecko/20100101 F
             'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
         }
 
-def djinni():
+def djinni(base_url):
     session = requests.Session()
-    base_url = 'https://djinni.co/jobs/?primary_keyword=Python&page=1&location=Киев'
+    
 
     domain = 'https://djinni.co/'
     jobs = []
@@ -37,12 +37,12 @@ def djinni():
                             'company': "'No name'"})
     return jobs
 
-def rabota():
+def rabota(base_url):
     session = requests.Session()
     headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
                 'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
             }
-    base_url = 'https://rabota.ua/jobsearch/vacancy_list?regionId=1&keyWords=Python'
+    
 
     domain = 'https://rabota.ua'
     jobs = []
@@ -88,13 +88,13 @@ def rabota():
 
     return jobs
 
-def work():
+def work(base_url):
     session = requests.Session()
 
     '''
     url = 'https://www.work.ua/ru/jobs-kyiv-python/'
     '''
-    base_url = 'https://www.work.ua/ru/jobs-kyiv-python/'
+    
 
     domain = 'https://www.work.ua'
     jobs = []
@@ -141,12 +141,12 @@ def work():
 
     return jobs
 
-def dou():
+def dou(base_url):
     session = requests.Session()
     headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
                 'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
             }
-    base_url = 'https://jobs.dou.ua/vacancies/?category=Python'
+
 
 
     jobs = []
