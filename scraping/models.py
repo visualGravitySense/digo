@@ -37,7 +37,7 @@ class Url(models.Model):
     url_address = models.CharField(max_length=250, unique=True, verbose_name='Адрес для поиска')
 
     def __str__(self):
-            return self.name
+            return 'Специальность {} в городе {} на сайте {} '.format(self.speciality, self.city, self.site)
 
     class Meta:
         verbose_name='Адрес для поиска'
