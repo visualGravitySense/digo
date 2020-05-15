@@ -9,8 +9,6 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:47.0) Gecko/20100101 F
 
 def djinni(base_url):
     session = requests.Session()
-    
-
     domain = 'https://djinni.co/'
     jobs = []
     urls = []
@@ -39,11 +37,6 @@ def djinni(base_url):
 
 def rabota(base_url):
     session = requests.Session()
-    headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
-                'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
-            }
-    
-
     domain = 'https://rabota.ua'
     jobs = []
     urls = []
@@ -90,12 +83,6 @@ def rabota(base_url):
 
 def work(base_url):
     session = requests.Session()
-
-    '''
-    url = 'https://www.work.ua/ru/jobs-kyiv-python/'
-    '''
-    
-
     domain = 'https://www.work.ua'
     jobs = []
     urls = []
@@ -143,12 +130,6 @@ def work(base_url):
 
 def dou(base_url):
     session = requests.Session()
-    headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
-                'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
-            }
-
-
-
     jobs = []
     urls = []
     urls.append(base_url)
