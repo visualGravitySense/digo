@@ -4,7 +4,7 @@ from scraping.utils import *
 from scraping.models import *
 
 def home(request):
-    city = City.objects.get(name='Lviv')
+    city = City.objects.get(name='Kyiv')
     speciality = Speciality.objects.get(name='Python')
     url_qs = Url.objects.filter(city=city, speciality=speciality)
     site = Site.objects.all()
