@@ -7,7 +7,7 @@ class VacancyAdmin(admin.ModelAdmin):
     list_display = ('title', 'url', 'city', 'speciality', 'timestamp')
 
 admin.site.register(City)
-admin.site.register(Vacancy)
+admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(Speciality)
 admin.site.register(Site)
 admin.site.register(Url)
