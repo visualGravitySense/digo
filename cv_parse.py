@@ -59,12 +59,9 @@ if req.status_code == 200:
         for page in pages:
             urls.append(domain + page.a['href'])
 
-url = 'https://www.cv.ee/toopakkumised/harjumaa/infotehnoloogia/'
-req = session.get(url, headers=headers)
-domain = 'https://www.cv.ee'
-jobs = []
 for url in urls:
         time.sleep(2)
+        req = session.get(url, headers=headers)
         if req.status_code == 200:
             bsObj = BS(req.content, "html.parser")
             div_list = bsObj.find_all('div', attrs={'class': 'offer_primary'})
