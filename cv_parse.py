@@ -22,28 +22,28 @@ if req.status_code == 200:
         pages = pagination.find_all('li', attrs={'class': False})
         for page in pages:
             urls.append(domain + page.a['href'])
-"""
-"""
-if req.status_code == 200:
-    bsObj = BS(req.content, "html.parser")
-    div_list = bsObj.find_all('div', attrs={'class': 'job-link'})
-    for div in div_list:
-        title = div.find('h2')
-        href = title.a['href']
-        short = div.p.text
-        company = "No name"
-        logo = div.find('img')
-        if logo:
-            company = logo['alt']
-        jobs.append({'href': domain + href,
-                     'title': title.text,
-                     'descript': short,
-                     'company': company})
+for url in urls:
+        time.sleep(2)
+        if req.status_code == 200:
+            bsObj = BS(req.content, "html.parser")
+            div_list = bsObj.find_all('div', attrs={'class': 'job-link'})
+            for div in div_list:
+                title = div.find('h2')
+                href = title.a['href']
+                short = div.p.text
+                company = "No name"
+                logo = div.find('img')
+                if logo:
+                    company = logo['alt']
+                jobs.append({'href': domain + href,
+                             'title': title.text,
+                             'descript': short,
+                             'company': company})
 
-    print(div.find('h2').text)
+#    print(div.find('h2').text)
 #    print(title.text)
-    print('www.work.ua' + href)
-"""
+#    print('www.work.ua' + href)
+
 """
 base_url = 'https://www.cv.ee/toopakkumised/harjumaa/infotehnoloogia/'
 domain = 'https://www.cv.ee'
@@ -58,33 +58,32 @@ if req.status_code == 200:
         pages = pagination.find_all('li', attrs={'class': False})
         for page in pages:
             urls.append(domain + page.a['href'])
-"""
-"""
+
 url = 'https://www.cv.ee/toopakkumised/harjumaa/infotehnoloogia/'
 req = session.get(url, headers=headers)
 domain = 'https://www.cv.ee'
 jobs = []
-if req.status_code == 200:
-    bsObj = BS(req.content, "html.parser")
-    div_list = bsObj.find_all('div', attrs={'class': 'offer_primary'})
-    for div in div_list:
-        title = div.find('h2')
-        href = title.a['href']
-        for div2 in div_list:
-            company = div2.find('li', {"class": "offer-company"})
-        #comp_href =
+for url in urls:
+        time.sleep(2)
+        if req.status_code == 200:
+            bsObj = BS(req.content, "html.parser")
+            div_list = bsObj.find_all('div', attrs={'class': 'offer_primary'})
+            for div in div_list:
+                title = div.find('h2')
+                href = title.a['href']
+                jobs.append({'href': domain + href,
+                             'title': title.text})
 
-        jobs.append({'href': domain + href,
-                     'title': title.text,
-                     'company': company})
+template = '<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body>'
+end = '</body></html>'
+content = '<h2>Cv.ee</h2>'
+for job in jobs:
+        content += '<a href="{href}" target_blank">{title}</a><br/><p>{href}</p><br/>'.format(**job)
+        content += '<hr/><br/><br/>'
+data = template + content + end
 
-#    print(div.find('h2').text)
-    print('https:' + href)
-    print(jobs)
-"""
-handle = codecs.open('urls.html', "w", 'utf-8')
-#handle.write(str(div.contents))
-handle.write(str(urls))
+handle = codecs.open('cv3.html', "w", 'utf-8')
+handle.write(str(data))
 handle.close()
 
 
