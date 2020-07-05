@@ -68,14 +68,19 @@ for url in urls:
             for div in div_list:
                 title = div.find('h2')
                 href = title.a['href']
+                company = "No name"
+                logo = div.find('li', {"class": "offer-company"})
+                if logo:
+                    company = logo('a')
                 jobs.append({'href': domain + href,
-                             'title': title.text})
+                             'title': title.text,
+                             'company': company})
 
 template = '<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body>'
 end = '</body></html>'
 content = '<h2>Cv.ee</h2>'
 for job in jobs:
-        content += '<a href="{href}" target_blank">{title}</a><br/><p>{href}</p><br/>'.format(**job)
+        content += '<a href="{href}" target_blank">{title}</a><br/><p>{company}</p><br/>'.format(**job)
         content += '<hr/><br/><br/>'
 data = template + content + end
 
