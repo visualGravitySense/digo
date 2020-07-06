@@ -4,23 +4,23 @@ import codecs
 import time
 import datetime
 session = requests.Session()
-headers = {'User-Agent': 'Safari/12.1.2 (MacOS Mojave 10.14.6) Gecko/20100101 Firefox/47.0',
-            'Accept':'text/html,application/xhtml+xml,application/xhtml;q=0.9,*/*;q=0.8'
-        }
-base_url = 'https://rabota.ua/jobsearch/vacancy_list?regionId=1&keyWords=Python'
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:47.0) Gecko/20100101 Firefox/47.0',
+           'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    }
+base_url = 'https://rabota.ua/jobsearch/vacancy_list?regionId=1&keyWords=python&period=2&lastdate='
 
 domain = 'https://rabota.ua'
 jobs = []
 urls = []
-#yesterday = datetime.date.today()-datetime.timedelta(1)
-#one_day_ago = yesterday.strftime('%d.%m.%Y')
-#base_url = base_url + one_day_ago
+yesterday = datetime.date.today()-datetime.timedelta(1)
+one_day_ago = yesterday.strftime('%d.%m.%Y')
+base_url = base_url + one_day_ago
 urls.append(base_url)
 
 req = session.get(base_url, headers=headers)
 if req.status_code == 200:
     bsObj = BS(req.content, "html.parser")
-    pagination = bsObj.find('dl', attrs={'id': 'ctl00_content_ctl00_gridList_ctl23_pagerInnerTable'})
+    pagination = bsObj.find('dl', attrs={'id': 'content_vacancyList_gridList_pagerInnerTable'})
     if pagination:
         pages = pagination.find_all('a', attrs={'class': 'f-always-blue'})
         for page in pages:
@@ -31,33 +31,35 @@ for url in urls:
     req = session.get(url, headers=headers)
     if req.status_code == 200:
         bsObj = BS(req.content, "html.parser")
-        table = bsObj.find('table', attrs={'id': 'ctl00_content_ctl00_gridList'})
+        table = bsObj.find('table', attrs={'id': 'content_vacancyList_gridList'})
         if table:
             tr_list = bsObj.find_all('tr', attrs={'id': True})
             for tr in tr_list:
-                p = tr.find('p', attrs={'class': 'card-title'})
-                title = p.a.text
-                href = p.a['href']
+                h3 = tr.find('h3', attrs={'class': 'f-vacancylist-vacancytitle'})
+                title = h3.a.text
+                href = h3.a['href']
                 short = 'No description'
                 company = "No name"
-                logo = tr.find('p', attrs={'class': 'company-name'})
+                logo = tr.find('p', attrs={'class': 'f-vacancylist-companyname'})
                 if logo:
                     company = logo.a.text
-                p = tr.find('div', attrs={'class': 'card-description'})
+                p = tr.find('p', attrs={'class': 'f-vacancylist-shortdescr'})
                 if p:
                     short = p.text
                 jobs.append({'href': domain + href,
-                            'title': title,
+                            'title': title, 
                             'descript': short,
                             'company': company})
-
-template = '<!doctype html><html lang="en"><head><meta charset="utf-8"><head><body>'
+    
+    # print(div.find('p', attrs={'class': 'overflow'}).text)
+# data = bsObj.prettify()#.encode('utf8')
+template = '<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body>'
 end = '</body></html>'
-content = '<h2> Rabota</h2>'
+content = '<h2> Rabota.ua</h2>'
 for job in jobs:
     content += '<a href="{href}" target="_blank">{title}</a><br/><p>{descript}</p><p>{company}</p><br/>'.format(**job)
     content += '<hr/><br/><br/>'
 data = template + content + end
-handle = codecs.open('rabota.html', "w", "utf-8")
+handle = codecs.open('jobs.html', "w", 'utf-8')
 handle.write(str(data))
-handle.close()
+handle.close() 
