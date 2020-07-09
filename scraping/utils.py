@@ -8,10 +8,8 @@ import random
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:47.0) Gecko/20100101 Firefox/47.0',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
 
-def djinni():
+def djinni(base_url):
     session = requests.Session()
-    base_url ='https://djinni.co/jobs/?title_only=True&primary_keyword=Python&location=Киев'
-
     domain = 'https://djinni.co'
     jobs = []
     urls = []
@@ -41,9 +39,8 @@ def djinni():
 
     return jobs
 
-def rabota():
+def rabota(base_url):
     session = requests.Session()
-    base_url = 'https://www.cv.ee/toopakkumised/harjumaa/infotehnoloogia/'
     domain = 'https://www.cv.ee'
     jobs = []
     urls = []
