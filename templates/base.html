@@ -54,13 +54,13 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'list' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="{% url 'create' %}">Подписаться</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link disabled" href="{#}">Профиль</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -81,9 +81,22 @@
 <main role="main" class="container my-5">
 
   <div class="starter-template text-center">
-
-    {% block content %}
-    {% endblock content %}
+      <div class="row">
+        <div class="col">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Важно: {% endif %}
+                              {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      {% block content %}
+      {% endblock content %}
   </div>
 
 </main><!-- /.container -->
